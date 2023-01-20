@@ -1,0 +1,14 @@
+pyspark
+pandas
+
+flask
+flask-cors
+gunicorn
+numpy
+--extra-index-url https://pypi.ngc.nvidia.com
+cudf-cu11 
+
+
+xgboost
+scikit-learn
+pyarrow
