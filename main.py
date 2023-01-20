@@ -5,25 +5,31 @@ from pyspark.sql import SparkSession
 import pandas as pd
 import numpy
 
+
+
 class VertexAIPySparkModel:
     def __init__(self, model_path):
-        # create spark local session
-        self.spark = SparkSession.builder.master("local").getOrCreate()
-        self.spark_pipeline_model = PipelineModel.load(model_path)
 
     def predict(self, pandas_df):
         """
         Note: input / output are both pandas dataframe.
         """
-        spark_df = self.spark.createDataFrame(pandas_df)
-        result_df = self.spark_pipeline_model.transform(spark_df)
+        spark_df = spark.createDataFrame(pandas_df)
+        result_df = spark_pipeline_model.transform(spark_df)
         return result_df
 
 app = Flask(__name__)
 CORS(app)
 
+#model_path saved locally
 model_path = "sparkml"
+
+#initialize model
 spark_model = VertexAIPySparkModel(model_path)
+
+# create spark local session
+spark = SparkSession.builder.master("local").getOrCreate()
+spark_pipeline_model = PipelineModel.load(model_path)
 
 
 # Health check route
